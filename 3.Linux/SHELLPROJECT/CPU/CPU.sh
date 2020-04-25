@@ -5,8 +5,12 @@ cat /proc/loadavg | awk '{printf("  %.2f  %.2f  %.2f  ", $1, $2, $3)}'
 #    printf("%s", temp[1]);
 #}
 temp=`cat /sys/class/thermal/thermal_zone0/temp`
-
-if [[ `expr $temp / 1000` lt  50  ]]; then
-    echo $temp
+temp=$((${temp} / 1000))
+if [[ $temp < 50 ]]; then
+    echo $temp | awk '{printf("%.2f℃ normal\n", $1)}'
+elif [[ ${temp} -lt 70 ]]; then
+    echo $temp | awk '{printf("%.2f  note\n", $1)}'
+else 
+    echo $temp | awk '{printf("%.2f  warning\n", $1)}'
 fi
 
