@@ -495,3 +495,11 @@ command1 `command2`
   * `-n +num`除了前num行，其他的都显示
 
 * `od`以二进制方式查看文件内容
+
+
+# resolute remote desktop
+
+```
+sudo apt-get install x11-xserver-utils dconf-editor dbus-x11 -y
+xhost +
+```
