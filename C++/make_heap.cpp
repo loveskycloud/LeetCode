@@ -16,14 +16,15 @@ int main()
         cout << x << " ";
     }
     cout << endl;
-    pop_heap(vec.begin(), vec.end(), less<>());
+    for (int i = 0; i < vec.size(); i++) 
+    {
+        pop_heap(vec.begin(), vec.end() - i, less<>());
+    }
     
     for (auto x : vec) {
         cout << x << " ";
     }
     cout << endl;
-
-    cout << vec.back() << endl;
 
     return 0;
 }

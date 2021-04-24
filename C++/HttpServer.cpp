@@ -1,27 +1,29 @@
 #include <iostream>
-
+#include <mutex>
 using namespace std;
+
 
 class HttpServer {
 public :
-    
     static HttpServer *getInstance() {
         if (instance == nullptr) {
-            instance = new HttpServer();
+            std::unique_lock<std::mutex> lock(m_mutex);
+            if (instance == nullptr) {
+                instance = new HttpServer();
+            }
         }
         return instance;
     }
-
-
-private :
+private:
     static HttpServer *instance;
+    static std::mutex m_mutex;
     HttpServer() {}
     HttpServer(const HttpServer &) = delete;
     ~HttpServer() {}
-
 };
 
 HttpServer *HttpServer::instance = nullptr;
+std::mutex HttpServer::m_mutex;
 
 int main()
 {

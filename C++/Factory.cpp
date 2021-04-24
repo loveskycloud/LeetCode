@@ -13,9 +13,9 @@ public :
 class ICar {
 public :
     class IFactory {
-        public z:
+        public :
             virtual ICar *create() = 0;
-    }
+    };
 
 private :
     ICar() {}
